@@ -19,7 +19,7 @@ namespace ProductWeb.Models
         public double Price { get; set; }
 
         [ValidateNever]
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
         [Required]
         [Display(Name = "Category Name")]
