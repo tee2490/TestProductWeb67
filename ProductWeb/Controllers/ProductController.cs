@@ -81,7 +81,7 @@ namespace ProductWeb.Controllers
 
 
                 //กรณีมีรูปภาพเดิมต้องลบทิ้งก่อน
-                if (productVM.Product.ImageUrl != null)
+                if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
                 {
                     // wwwroot\images\product\test.jpg
                     var oldImagePath = Path.Combine(uploads, productVM.Product.ImageUrl);
