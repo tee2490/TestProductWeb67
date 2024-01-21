@@ -5,12 +5,12 @@
         <form asp-action="UpCreate" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            @Html.HiddenFor(Model=>Model.Product.Id)
+            @Html.HiddenFor(Model => Model.Product.Id)
             @* <input hidden class="form-control" asp-for="Product.Id"> *@
 
             <div class="mb-3">
-                <label asp-for="Product.Name" ></label>
-                <input  class="form-control" asp-for="Product.Name" >
+                <label asp-for="Product.Name"></label>
+                <input class="form-control" asp-for="Product.Name">
                 <span class="text-danger" asp-validation-for="Product.Name"></span>
             </div>
 
@@ -27,7 +27,7 @@
             </div>
 
             <div class="mb-3">
-                <select class="form-select" asp-for="Product.CategoryId" asp-items="Model.CategoryList" >
+                <select class="form-select" asp-for="Product.CategoryId" asp-items="Model.CategoryList">
                     <option disabled selected>Please select category</option>
                 </select>
                 <span class="text-danger" asp-validation-for="Product.CategoryId"></span>
@@ -35,14 +35,15 @@
 
             <div class="form-group">
                 <label asp-for="Product.ImageUrl" class="control-label"></label>
-                <input type="file" id="uploadBox" name="file" class="form-control" onchange="loadFile(event)" />
+                <input type="file" id="uploadBox" asp-for="file" class="form-control" onchange="loadFile(event)" />
             </div>
 
-          
-            <button type="submit" class="mb-3 btn @(Model.Product.Id == 0 ? "btn-success":"btn-danger")">
-                @(Model.Product.Id == 0 ? "Create":"Update")
-            </button>
-            <a class="btn btn-secondary" asp-action="Index">Back</a>
+            <div class="mb-3">
+                <button type="submit" class="btn @(Model.Product.Id == 0 ? "btn-success":"btn-danger")">
+                    @(Model.Product.Id == 0 ? "Create" : "Update")
+                </button>
+                <a class="btn btn-secondary" asp-action="Index">Back</a>
+            </div>
         </form>
 
     </div>
@@ -53,8 +54,8 @@
 
 @section Scripts {
     @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
     <script>
         tinymce.init({

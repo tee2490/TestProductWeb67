@@ -11,6 +11,9 @@
         public const string StatusApproved = "Approved";
         public const string StatusCancelled = "Cancelled";
 
+        public const string ImagePath = @"\images";
+        public const string ProductPath = ImagePath + @"\products";
+
     }
 
 }

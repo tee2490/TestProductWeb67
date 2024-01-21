@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ProductWeb.ViewModels
@@ -9,5 +10,8 @@ namespace ProductWeb.ViewModels
 
         [ValidateNever]
         public IEnumerable<SelectListItem> CategoryList { get; set; }
+
+        [ValidateNever]
+        public IFormFile file { get; set; }
     }
 }
