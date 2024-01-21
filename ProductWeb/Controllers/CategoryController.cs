@@ -64,6 +64,13 @@ namespace ProductWeb.Controllers
 
             if (category != null)
             {
+                var product=_productContext.Products.Where(p => p.CategoryId == id).FirstOrDefault();
+                if (product != null) 
+                {
+                    TempData["message"] = "ไม่สามารถลบได้ มีการใช้งานอยู่";
+                    return RedirectToAction(nameof(Index));
+                }
+
                 _productContext.Categories.Remove(category);
                 _productContext.SaveChanges();
                 TempData["message"] = "ลบสำเร็จเรียบร้อย";
