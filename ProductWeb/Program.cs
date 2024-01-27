@@ -5,6 +5,7 @@ global using Microsoft.AspNetCore.Identity;
 global using ProductWeb.Data;
 using ProductWeb.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using ProductWeb.Services.IService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,16 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
+builder.Services.AddScoped<ShoppingCartService>();
+
+#region MyPath ต้องใส่เพื่อให้จดจำเส้นทางการ Login-Logout
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
+#endregion
 
 builder.Services.AddRazorPages();
 
