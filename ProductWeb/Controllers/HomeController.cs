@@ -6,27 +6,31 @@ namespace ProductWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ProductContext _productContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ProductContext productContext)
         {
-            _logger = logger;
+            _productContext = productContext;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var products = _productContext.Products.ToList();
+
+            foreach (var item in products)
+            {
+                if (!string.IsNullOrEmpty(item.ImageUrl))
+                {
+                    item.ImageUrl = SD.ProductPath + "\\" + item.ImageUrl;
+                }
+            }
+
+            return View(products);
         }
 
-        public IActionResult Privacy()
+       public IActionResult Details(int productId)
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
