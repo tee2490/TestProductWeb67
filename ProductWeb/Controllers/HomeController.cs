@@ -31,10 +31,10 @@ namespace ProductWeb.Controllers
             return View(products);
         }
 
-       public IActionResult Details(int Id)
+       public IActionResult Details(int productId)
         {
             var product = _productContext.Products.Include(p=>p.Category)
-                .FirstOrDefault(x => x.Id.Equals(Id));
+                .FirstOrDefault(x => x.Id.Equals(productId));
 
             if (product == null) 
             {
@@ -77,7 +77,7 @@ namespace ProductWeb.Controllers
                 _shoppingCartService.IncrementCount(cartFromDb, shoppingCart.Count);
             }
            
-           // _shoppingCartService.Save();
+            _shoppingCartService.Save();
 
             return RedirectToAction(nameof(Index));
         }
